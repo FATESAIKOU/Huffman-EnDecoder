@@ -6,10 +6,12 @@ This file was wrote for test HEnDecoder
 """
 
 #from HEnDecoder.HEnDecoder import HEnDecoder
-#import Utils
+import Utils
+
+#from pprint import pprint
 
 # get option
-# opt = Utils.GetOption()
+opt = Utils.GetOption()
 
 # if encode
 #   (heigh, width, image_data) = Utils.LoadImage(filename)
