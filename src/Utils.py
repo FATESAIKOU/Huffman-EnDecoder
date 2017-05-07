@@ -5,13 +5,25 @@ Utils
 """
 
 import sys
+import numpy as np
+
+import Image
 
 from optparse import OptionParser
 
 #from pprint import pprint
 
+"""
+Get Options
+
+output: [
+    'mode': str,
+    'src': str,
+    'dest': str,
+    'pmode': int(0-7)
+]
+"""
 def GetOption():
-    # Define Options
     parser = OptionParser()
     parser.add_option("-m", "--mode", dest="mode",
                     help="use this program in encode/decode mode",
@@ -41,11 +53,30 @@ def GetOption():
 def ShowStatus():
     print "ShowStatus"
 
-def LoadImage():
-    print "LoadImage"
+"""
+Load Image
 
-def SaveImage():
-    print "SaveImage"
+input: filename(path)
+output: (int, int, np.array)
+"""
+def LoadImage(filename):
+    image = Image.open(filename)
+
+    (width, heigh) = image.size
+    image_data = np.array(image.getdata())
+
+    return (heigh, width, image_data)
+
+"""
+Save Image
+
+input: filename(path), int, int, np.array 
+"""
+def SaveImage(filename, heigh, width, image_data):
+    image = Image.new('L', (width, heigh))
+    image.putdata(image_data)
+
+    image.save(filename)
 
 def LoadRaw():
     print "LoadRaw"
