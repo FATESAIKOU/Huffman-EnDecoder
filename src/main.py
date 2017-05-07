@@ -26,10 +26,10 @@ if opt.mode == 'encode':
 #   Utils.SaveRaw(filename, hcer.GetEncodeResult())
 #
 elif opt.mode == 'decode':
-    (heigh, width, t_size, table, content) = Utils.LoadRaw(opt.src)
+    (heigh, width, pmode, table, content) = Utils.LoadRaw(opt.src)
 #
 #   hcer = HEnDecoder()
-#   hcer.SetDecode(heigh, width, t_size, table, content)
+#   hcer.SetDecode(heigh, width, pmode, table, content)
 #   hcer.Decode()
 #
 #   Utils.SaveImage(opt.dest, heigh, width, hcer.GetDecodeResult())
