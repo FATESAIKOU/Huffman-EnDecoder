@@ -94,8 +94,6 @@ def LoadRaw(filename):
     seq = bitarray(content[20 + table_size:])[0:seq_bit_len]
 
     return (heigh, width, pmode, table, seq)
-    
-    print "LoadRaw"
 
 """
 Load Raw Data (compressed data)
