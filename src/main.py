@@ -5,7 +5,8 @@ This file was wrote for test HEnDecoder
 @author: FATESAIKOU
 """
 
-#from HEnDecoder import HEnDecoder
+#from HEnDecoder.HEnDecoder import HEnDecoder
+#import Utils
 
 # get option
 # opt = Utils.GetOption()
