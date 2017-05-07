@@ -17,6 +17,8 @@ def LoadRaw():
 def SaveRaw():
     print "SaveRaw"
 
+def GetOption():
+    print "GetOption"
 
 def ShowStatus():
     print "ShowStatus"
