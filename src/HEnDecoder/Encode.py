@@ -7,8 +7,6 @@ The defination of image decoding work flow.
 import heapq
 from bitarray import bitarray
 
-#from pprint import pprint
-
 def GetABC(data, index):
     return (data[index] if index > 0 else 0)
 

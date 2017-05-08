@@ -18,8 +18,9 @@ class HEnDecoder:
         return {
                 'table': self.__code_table,
                 'count': self.__code_count,
-                'ori_data': self.__data,
-                'compressed_data': self.__seq
+                'pmode': self.__pmode,
+                'ori_len': len(self.__data) * 8,
+                'compressed_len': len(self.__seq)
                 }
 
 

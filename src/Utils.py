@@ -14,10 +14,12 @@ import struct
 from optparse import OptionParser
 from bitarray import bitarray
 
+#from pprint import pprint
+
 """
 Get Options
 
-output: [ 'mode': str, 'src': str, 'dest': str, 'pmode': int(0-7)]
+output: {'mode': str, 'src': str, 'dest': str, 'pmode': int(0-7)}
 """
 def GetOption():
     parser = OptionParser()
@@ -46,8 +48,25 @@ def GetOption():
 
     return opt
 
+"""
+Show Encode Status
+
+input: {'table': dict, 'count': dict, 'pmode': int, 'ori_len': int, 'compressed_len': int}
+"""
 def ShowStatus(status_obj):
-    print "ShowStatus"
+    print "|\tSymbol Name\t|\tcode\t|\tcount\t|"
+    for k in status_obj['table']:
+        print "|\t%s\t\t|\t%s\t|\t%f%%\t|" % (k,
+                status_obj['table'][k].to01(),
+                status_obj['count'][k] * 100.0 / status_obj['ori_len']
+            )
+
+    print "<Predict Mode> : %d" % status_obj['pmode']
+    print "<Compress Rate>: %d / %d (%f%%)" % (
+            status_obj['compressed_len'],
+            status_obj['ori_len'],
+            status_obj['compressed_len'] * 100.0 / status_obj['ori_len']
+        )
 
 """
 Load Image

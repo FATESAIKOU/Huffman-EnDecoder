@@ -8,11 +8,10 @@ This file was wrote for test HEnDecoder
 from HEnDecoder.HEnDecoder import HEnDecoder
 import Utils
 
-from pprint import pprint
+#from pprint import pprint
 
 # get option
 opt = Utils.GetOption()
-pprint(opt)
 
 if opt.mode == 'encode':
     (heigh, width, image_data) = Utils.LoadImage(opt.src)
