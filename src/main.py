@@ -8,7 +8,6 @@ This file was wrote for test HEnDecoder
 from HEnDecoder.HEnDecoder import HEnDecoder
 import Utils
 
-#from pprint import pprint
 
 # get option
 opt = Utils.GetOption()
@@ -26,9 +25,9 @@ if opt.mode == 'encode':
 
 elif opt.mode == 'decode':
     (heigh, width, pmode, table, content) = Utils.LoadRaw(opt.src)
-#
-#   hcer = HEnDecoder()
-#   hcer.SetDecode(heigh, width, pmode, table, content)
-#   hcer.Decode()
-#
-#   Utils.SaveImage(opt.dest, heigh, width, hcer.GetDecodeResult())
+
+    hcer = HEnDecoder()
+    hcer.SetDecode(heigh, width, pmode, table, content)
+    hcer.Decode()
+
+    Utils.SaveImage(opt.dest, heigh, width, hcer.GetDecodeResult())

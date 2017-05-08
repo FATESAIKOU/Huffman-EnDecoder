@@ -92,6 +92,7 @@ def SaveImage(filename, heigh, width, image_data):
     image.putdata(image_data)
 
     image.save(filename)
+    image.show()
 
 """
 Load Raw Data (compressed data)

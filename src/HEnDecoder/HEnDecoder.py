@@ -6,14 +6,11 @@ Implementation of HEnDecoder.
 
 
 import Encode as ec
+import Decode as dc
 
 from bitarray import bitarray
-#from pprint import pprint
 
 class HEnDecoder:
-    def __init__(self):
-        print "Init"
-
     def GetStatus(self):
         return {
                 'table': self.__code_table,
@@ -22,7 +19,6 @@ class HEnDecoder:
                 'ori_len': len(self.__data) * 8,
                 'compressed_len': len(self.__seq)
                 }
-
 
     def SetEncode(self, im_data, im_heigh, im_width, pmode):
         self.__data = im_data
@@ -48,13 +44,17 @@ class HEnDecoder:
             'seq': self.__seq
         }
 
-    def SetDecode(self):
-        print "SetDecode"
+    def SetDecode(self, im_heigh, im_width, pmode, table, content):
+        self.__heigh = im_heigh
+        self.__width = im_width
+        self.__pmode = pmode
+        self.__code_table = table
+        self.__seq = content
 
     def Decode(self):
-        print "Decode"
+        self.__diff_data = self.__seq.decode(self.__code_table)
+        
+        self.__data = dc.BuildFromDiff(self.__diff_data, self.__width, self.__pmode)
 
     def GetDecodeResult(self):
-        print "GetDecodeResult"
-    
-    
+        return self.__data
