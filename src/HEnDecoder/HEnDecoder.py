@@ -4,19 +4,23 @@ Implementation of HEnDecoder.
 @auth: FATESAIKOU
 """
 
-#import numpy as np
 
 import Encode as ec
 
 from bitarray import bitarray
-from pprint import pprint
+#from pprint import pprint
 
 class HEnDecoder:
     def __init__(self):
         print "Init"
 
     def GetStatus(self):
-        print "GetStatus"
+        return {
+                'table': self.__code_table,
+                'count': self.__code_count,
+                'ori_data': self.__data,
+                'compressed_data': self.__seq
+                }
 
 
     def SetEncode(self, im_data, im_heigh, im_width, pmode):
@@ -26,22 +30,21 @@ class HEnDecoder:
         self.__pmode = pmode
 
     def Encode(self):
-        self.__diff_count = ec.GetDiffCount(self.__data, self.__width, self.__pmode)
-        (self.__code_table, self.__code_tree) = ec.GenCodeTable(self.__diff_count)
-        pprint(self.__code_table)
-        # table = Huffman-encode([(s, v) for (s, v) in appearance_dict.items() if v > 0]) (heap insert/pop)
-        # seq = getSequence(self.__data, table)
+        (self.__diff_data, self.__diff_count) = ec.GetDiffCount(self.__data, self.__width, self.__pmode)
+        (self.__code_table, self.__code_count) = ec.GenCodeTable(self.__diff_count)
 
-        # update self status/data
-        print "Encode"
+        self.__seq = bitarray()
+        self.__seq.encode(self.__code_table, self.__diff_data)
+
+        self.__seq.decode(self.__code_table)
 
     def GetEncodeResult(self):
         return {
-            'heigh': 110,
-            'width': 100,
-            'pmode': 7,
-            'table': [[1, 2], 3],
-            'seq': bitarray('01')
+            'heigh': self.__heigh,
+            'width': self.__width,
+            'pmode': self.__pmode,
+            'table': {k: v.to01() for (k, v) in self.__code_table.items()},
+            'seq': self.__seq
         }
 
     def SetDecode(self):

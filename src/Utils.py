@@ -14,8 +14,6 @@ import struct
 from optparse import OptionParser
 from bitarray import bitarray
 
-#from pprint import pprint
-
 """
 Get Options
 
@@ -48,7 +46,7 @@ def GetOption():
 
     return opt
 
-def ShowStatus():
+def ShowStatus(status_obj):
     print "ShowStatus"
 
 """
@@ -90,7 +88,8 @@ def LoadRaw(filename):
     (heigh, width, pmode, table_size, seq_bit_len,) = struct.unpack('IIIII', content[0:20])
     (table_json,) = struct.unpack('%ds' % (table_size), content[20:20 + table_size])
     
-    table = json.loads(table_json)
+    table_src = json.loads(table_json)
+    table = {int(k): bitarray(str(v)) for (k, v) in table_src.items()}
     
     seq = bitarray()
     seq.frombytes(content[20 + table_size:])
@@ -105,7 +104,7 @@ input: filename(path),  res[
                             'heigh': int,
                             'width': int,
                             'pmode': int,
-                            'table': list,
+                            'table': dict(int, bitarray),
                             'seq'  : bitarray
                         ]
 """

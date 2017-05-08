@@ -20,11 +20,11 @@ if opt.mode == 'encode':
     hcer = HEnDecoder()
     hcer.SetEncode(image_data, heigh, width, int(opt.pmode))
     hcer.Encode()
-#
-#   Utils.ShowStatus(hcer.GetStatus())
-#
-#    Utils.SaveRaw(opt.dest, hcer.GetEncodeResult())
-#
+
+    Utils.ShowStatus(hcer.GetStatus())
+
+    Utils.SaveRaw(opt.dest, hcer.GetEncodeResult())
+
 elif opt.mode == 'decode':
     (heigh, width, pmode, table, content) = Utils.LoadRaw(opt.src)
 #
@@ -33,5 +33,3 @@ elif opt.mode == 'decode':
 #   hcer.Decode()
 #
 #   Utils.SaveImage(opt.dest, heigh, width, hcer.GetDecodeResult())
-
-print "Test Start!"
