@@ -42,7 +42,7 @@ def GetOption():
         print "The MODE should be either 'decode' or 'encode'!"
         sys.exit(0)
 
-    if opt.pmode not in ['0', '1', '2', '3', '4', '5', '6', '7']:
+    if opt.mode == 'encode' and opt.pmode not in ['0', '1', '2', '3', '4', '5', '6', '7']:
         print "The PMODE should be a integar within 0 to 7!"
         sys.exit(0)
 
@@ -91,7 +91,10 @@ def LoadRaw(filename):
     (table_json,) = struct.unpack('%ds' % (table_size), content[20:20 + table_size])
     
     table = json.loads(table_json)
-    seq = bitarray(content[20 + table_size:])[0:seq_bit_len]
+    
+    seq = bitarray()
+    seq.frombytes(content[20 + table_size:])
+    seq = seq[0:seq_bit_len]
 
     return (heigh, width, pmode, table, seq)
 
@@ -107,14 +110,14 @@ input: filename(path),  res[
                         ]
 """
 def SaveRaw(filename, res):
-    table_json = json.dumps(res.table).replace(" ", "")
+    table_json = json.dumps(res['table']).replace(" ", "")
     table_size = len(table_json)
-    seq_bit_len = len(res.seq) # can be diff to byte
+    seq_bit_len = len(res['seq']) # can be diff to byte
 
     dest = open(filename, 'wb')
 
-    dest.write(struct.pack('IIIII', res.heigh, res.width, res.pmode, table_size, seq_bit_len))
+    dest.write(struct.pack('IIIII', res['heigh'], res['width'], res['pmode'], table_size, seq_bit_len))
     dest.write(struct.pack('%ds' % table_size, table_json))
-    res.seq.tofile(dest)
+    dest.write(res['seq'].tobytes())
 
     dest.close()
