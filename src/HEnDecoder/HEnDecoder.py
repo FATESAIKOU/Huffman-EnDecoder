@@ -6,7 +6,7 @@ Implementation of HEnDecoder.
 
 #import numpy as np
 
-import Decode as dc
+import Encode as ec
 
 from bitarray import bitarray
 from pprint import pprint
@@ -26,8 +26,8 @@ class HEnDecoder:
         self.__pmode = pmode
 
     def Encode(self):
-        self.__diff_count = dc.GetDiffCount(self.__data, self.__width, self.__pmode)
-        (self.__code_table, self.__code_tree) = dc.GenCodeTable(self.__diff_count)
+        self.__diff_count = ec.GetDiffCount(self.__data, self.__width, self.__pmode)
+        (self.__code_table, self.__code_tree) = ec.GenCodeTable(self.__diff_count)
         pprint(self.__code_table)
         # table = Huffman-encode([(s, v) for (s, v) in appearance_dict.items() if v > 0]) (heap insert/pop)
         # seq = getSequence(self.__data, table)
