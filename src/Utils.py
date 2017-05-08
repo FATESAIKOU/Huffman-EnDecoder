@@ -5,7 +5,6 @@ Utils
 """
 
 import sys
-import numpy as np
 
 import Image
 import json
@@ -72,13 +71,13 @@ def ShowStatus(status_obj):
 Load Image
 
 input: filename(path)
-output: (int, int, np.array)
+output: (int, int, list)
 """
 def LoadImage(filename):
     image = Image.open(filename)
 
     (width, heigh) = image.size
-    image_data = np.array(image.getdata())
+    image_data = list(image.getdata())
 
     return (heigh, width, image_data)
 
