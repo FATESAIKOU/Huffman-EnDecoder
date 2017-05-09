@@ -6,14 +6,13 @@ Utils
 
 import sys
 
-import Image
 import json
 import struct
 
+from PIL import Image
 from optparse import OptionParser
 from bitarray import bitarray
 
-#from pprint import pprint
 
 """
 Get Options

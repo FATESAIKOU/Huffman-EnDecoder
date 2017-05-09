@@ -33,8 +33,6 @@ class HEnDecoder:
         self.__seq = bitarray()
         self.__seq.encode(self.__code_table, self.__diff_data)
 
-        self.__seq.decode(self.__code_table)
-
     def GetEncodeResult(self):
         return {
             'heigh': self.__heigh,
